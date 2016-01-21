@@ -35,20 +35,18 @@ def plant_shippe(num,occupied,board):
 		return ship
 
 def find_neighbors(board, point):
+	'''Find neighbors for a given point on board'''
 	x = point[0]
 	y = point[1]
 	neighbors = []
-	neighbors.append((x+1,y))
-	neighbors.append((x-1,y))	
-	neighbors.append((x,y+1))
-	neighbors.append((x,y-1))
-	for neighbor in neighbors:
-		if neighbor[0] > len(board)-1 or neighbor[0] < 0:
-#			print neighbor
-			neighbors.remove(neighbor)
-		elif neighbor[1] > len(board)-1 or neighbor[1] < 0:
-#			print neighbor
-			neighbors.remove(neighbor)
+	if x !=len(board)-1:
+		neighbors.append((x+1,y))
+	if x !=0:
+		neighbors.append((x-1,y))	
+	if y !=len(board)-1:
+		neighbors.append((x,y+1))
+	if y !=0:
+		neighbors.append((x,y-1))
 	return neighbors
 
 
@@ -64,6 +62,8 @@ def calculate_occupied(ship, board):
 	return occupied
 
 def deploy_ships(shiplist,board, names):
+	'''Place the ships on board 
+	return dictionary with list of points as keys + names as values'''
 	occupied = set()
 	ships_dict = dict()
 	for index in range(len(shiplist)):
@@ -74,34 +74,29 @@ def deploy_ships(shiplist,board, names):
 			ships_dict[point] =names[index]
 	return ships_dict,occupied
 
-#TODO remove occupied from deploy_ship returns
-#TODO list index put of range przy wartosci 12 (skad ona?!)
-
 if __name__ == '__main__':	
+#requirements:
+#- list of ships
+#- board size
+#- names
+
 	ships = [4,3,3,2,2,2,1,1,1,1]
-#	ships=[4]
 	names = ['Battleship Potemkin','Red October','Black Pearl', \
 	'Bounty','Arabella','Demeter','Flying Dutchman', 'Das Boot','Yellow Submarine',\
 	'Nautilus']
-	#~ board = make_board(12)
+	board = make_board(12)
 
-	#~ d,o = deploy_ships(ships, board, names)
-	#~ preview = board_preview(board, o,d.keys())
-	#~ print_board(board)
-	#~ for key,value in d.iteritems():
-		#~ if value=="Battleship Potemkin":
-			#~ print value, key
-	#~ print len(d.keys())
+	d,o = deploy_ships(ships, board, names)
+	preview = board_preview(board, o,d.keys())
+	print_board(board)
 	
-	counter = 0
-	while counter <20:
-		board = make_board(12)
-		d,o = deploy_ships(ships, board, names)
-		for point in o:
-			x,y = point
-			if x==12 or y==12:
-				print d.keys()
-				print o
-		counter +=1
-	else:
-		print "No mistakes!"
+	#~ counter = 0
+	#~ while counter <20:
+		#~ board = make_board(12)
+		#~ d,o = deploy_ships(ships, board, names)
+		#~ if (0,11) in d.keys():
+			#~ preview = board_preview(board, o,d.keys())
+			#~ print_board(board)
+		#~ counter +=1
+	#~ else:
+		#~ print "No mistakes!"
