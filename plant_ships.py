@@ -61,9 +61,9 @@ def calculate_occupied(ship, board):
 				occupied.append(guy)
 	return occupied
 
-def deploy_ships(shiplist,board, names):
+def deploy_ships(shiplist,board):
 	'''Place the ships on board 
-	return dictionary with list of points as keys + names as values'''
+	return dictionary with list of points as keys + index as value'''
 	occupied = set()
 	ships_dict = dict()
 	for index in range(len(shiplist)):
@@ -71,7 +71,7 @@ def deploy_ships(shiplist,board, names):
 		for field in calculate_occupied(s, board):
 			occupied.add(field)
 		for point in s:
-			ships_dict[point] =names[index]
+			ships_dict[point] =index
 	return ships_dict,occupied
 
 if __name__ == '__main__':	
@@ -86,7 +86,9 @@ if __name__ == '__main__':
 	'Nautilus']
 	board = make_board(12)
 
-	d,o = deploy_ships(ships, board, names)
+	d,o = deploy_ships(ships, board)
+	for key,value in d.iteritems():
+		print key, value, names[value]
 	preview = board_preview(board, o,d.keys())
 	print_board(board)
 	
