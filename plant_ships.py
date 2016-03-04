@@ -84,13 +84,12 @@ if __name__ == '__main__':
 	names = ['Battleship Potemkin','Red October','Black Pearl', \
 	'Bounty','Arabella','Demeter','Flying Dutchman', 'Das Boot','Yellow Submarine',\
 	'Nautilus']
-	board = make_board(12)
+	board = make_board(10)
 
 	d,o = deploy_ships(ships, board)
 	for key,value in d.iteritems():
 		print key, value, names[value]
 	preview = board_preview(board, o,d.keys())
-	print_board(board)
 	
 	#~ counter = 0
 	#~ while counter <20:
