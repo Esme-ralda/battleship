@@ -2,12 +2,14 @@
 import string
 
 def make_board(n):
+	'''Make a battleship board'''
 	board = []
 	for i in range(n):
 		board.append(["O"]*n)
 	return board
 
 def print_board(board):
+	'''Print a pretty board with col and row names'''
 	head = string.ascii_uppercase[0:len(board[0])]
 	print '    ',
 	for letter in head:
@@ -22,7 +24,7 @@ def print_board(board):
 		c+=1
 
 def board_preview(board, occupied, ships):
-	#for marking deployed ships
+	'''for marking deployed ships on board'''
 	for a in occupied:
 		x,y=a
 		board[y][x]="x"

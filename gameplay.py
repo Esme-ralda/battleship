@@ -13,7 +13,8 @@ if __name__ == '__main__':
 	'Bounty','Arabella','Demeter','Flying Dutchman', 'Das Boot','Yellow Submarine',\
 	'Nautilus']
 	board = make_board(10)
-
+	print make_board.__doc__
+	
 	d,o = deploy_ships(ships, board)
 	print_board(board)
 	#ask for column and row, transform a letter into x value
